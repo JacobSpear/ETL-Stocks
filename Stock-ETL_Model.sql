@@ -7,39 +7,30 @@
 -- two dots ('..' - without quotes).
 
 CREATE TABLE "tickers" (
-    "ticker" VARCHAR(30)   NOT NULL,
-    "company_name" Varchar(100)   NOT NULL,
-    "sector_id" INT   NOT NULL,
-    CONSTRAINT "pk_tickers" PRIMARY KEY (
-        "ticker"
-     )
+    "ticker" VARCHAR(30) PRIMARY KEY,
+    "company_name" Varchar(100) NOT NULL,
+    "sector_id" INT,
 );
 
 CREATE TABLE "sectors" (
-    "sector_id" INT   NOT NULL,
-    "sector" Varchar(30)   NOT NULL,
-    CONSTRAINT "pk_sectors" PRIMARY KEY (
-        "sector_id"
-     )
+    "sector_id" SERIAL PRIMARY KEY,
+    "sector" Varchar(30) NOT NULL,
 );
 
 CREATE TABLE "calendar" (
-    "date_id" INT   NOT NULL,
+    "date_id" INT PRIMARY KEY,
     "day" int   NOT NULL,
     "month" int   NOT NULL,
     "day_of_year" int   NOT NULL,
     "day_of_quarter" int   NOT NULL,
     "year" int   NOT NULL,
-    CONSTRAINT "pk_calendar" PRIMARY KEY (
-        "date_id"
-     )
 );
 
 CREATE TABLE "stocks" (
-    "ticker" Varchar(10)   NOT NULL,
-    "date_id" INT   NOT NULL,
-    "open_price" FLOAT   NOT NULL,
-    "close_price" float   NOT NULL,
+    "ticker" Varchar(30)  NOT NULL,
+    "date_id" INT  NOT NULL,
+    "open_price" FLOAT  NOT NULL,
+    "close_price" FLOAT  NOT NULL,
     "high_price" FLOAT   NOT NULL,
     "low_price" FLOAT   NOT NULL,
     "volume" int   NOT NULL,
@@ -49,16 +40,13 @@ CREATE TABLE "stocks" (
 );
 
 CREATE TABLE "currencies" (
-    "currency_id" INT   NOT NULL,
+    "currency_id" SERIAL PRIMARY KEY,
     "currency_symbol" Varchar(50)   NOT NULL,
-    CONSTRAINT "pk_currencies" PRIMARY KEY (
-        "currency_id"
-     )
 );
 
 CREATE TABLE "exchange_rates" (
     "from_currency_id" INT   NOT NULL,
-    "to_currency_id" int   NOT NULL,
+    "to_currency_id" INT  NOT NULL,
     "date_id" INT   NOT NULL,
     "open_value" float   NOT NULL,
     "close_value" float   NOT NULL,
