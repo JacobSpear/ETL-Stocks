@@ -8,6 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from config import password
 from image import one_year_open
+from get_data import get_data
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, func, create_engine, ForeignKey
@@ -119,6 +120,11 @@ def tickers_endpoints():
         all_tickers = list(np.ravel(results))
 
         return jsonify(all_names)
+
+@app.route("/endpoints/stock_data/<currency_symbol>/<ticker_name>/<from_date>/<to_date>")
+def stock_currency(currency_symbol,ticker_name,from_date,to_date):
+    return jsonify(get_data(currency_symbol,ticker_name,from_date,to_date))
+
 
 @app.route('/endpoint/api/ticker/<ticker_name>')
 def stocks(ticker_name):
