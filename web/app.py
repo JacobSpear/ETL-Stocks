@@ -1,25 +1,75 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, url_for
 import numpy as np
+import os
 
-import sqlalchemy
-from sqlalchemy.ext.automap import automap_base
+from time import sleep
+import requests
+import pandas as pd
+import matplotlib.pyplot as plt
+from config import password
+from image import one_year_open
+
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, Float, func, create_engine, ForeignKey
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
+import datetime as dt
 
 
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("sqlite:///titanic.sqlite")
+#Create ORM Classes
+Base=declarative_base()
 
-# # reflect an existing database into a new model
-Base = automap_base()
-# # reflect the tables
-Base.prepare(engine, reflect=True)
 
-# # Save reference to the table
-# 
-Tickers = Base.classes.tickers
+class Sector(Base):
+    __tablename__="sectors"
+    sector_id = Column(Integer, primary_key=True)
+    sector = Column(String(30))
+
+class Ticker(Base):
+    __tablename__="tickers"
+    ticker = Column(String(30),primary_key=True)
+    company_name = Column(String(100))
+    sector_id = Column(Integer, ForeignKey("sectors.sector_id"))
+
+class Currency(Base):
+    __tablename__="currencies"
+    currency_id = Column(Integer, primary_key=True)
+    currency_symbol = Column(String(50))
+
+class Date(Base):
+    __tablename__="calendar"
+    date_id = Column(Integer,primary_key=True)
+    day = Column(Integer)
+    month = Column(Integer)
+    day_of_year = Column(Integer)
+    day_of_quarter = Column(Integer)
+    year = Column(Integer)
+
+class Stock(Base):
+    __tablename__="stocks"
+    ticker = Column(String(30),ForeignKey("tickers.ticker"),primary_key=True)
+    date_id = Column(Integer,ForeignKey("calendar.date_id"),primary_key=True)
+    open_price = Column(Float())
+    close_price = Column(Float())
+    high_price = Column(Float())
+    low_price = Column(Float())
+    volume = Column(Integer)
+    
+class Exchange_rate(Base):
+    __tablename__="exchange_rates"
+    from_currency_id = Column(Integer, ForeignKey("currencies.currency_id"),primary_key=True)
+    to_currency_id = Column(Integer, ForeignKey("currencies.currency_id"),primary_key=True)
+    date_id = Column(Integer, ForeignKey("calendar.date_id"),primary_key=True)
+    open_value = Column(Float())
+    close_value = Column(Float())
+    
+#Create Connection
+engine = create_engine(f"postgresql://postgres:{password}@localhost:5432/Stocks")
+conn = engine.connect()
+session = Session(bind=engine)
+Base.metadata.create_all(engine)
 
 #################################################
 # Flask Setup
@@ -70,13 +120,13 @@ def tickers_endpoints():
 
         return jsonify(all_names)
 
-@app.route('/endpoint/api/ticker/<ticker_name>.html')
+@app.route('/endpoint/api/ticker/<ticker_name>')
 def stocks(ticker_name):
     """Return the stocksdata as json"""
 
     # return jsonify(stocks_ticker)
 
-    """Fetch the tickers tat match
+    """Fetch the tickers that match
        the path variable supplied by the user, or a 404 if not."""
 
     canonicalized = ticker_name.replace(" ", "").lower()
@@ -88,6 +138,10 @@ def stocks(ticker_name):
 
     return jsonify({"error": f"Ticker named {ticker_name} not found."}), 404
 
+@app.route('/plots/<ticker_name>/<year>')
+def ticker_year_plot(ticker_name,year):
+    img_url = one_year_open(ticker_name,year)
+    return render_template("plots.html",img_url = url_for('static',filename=img_url))
 
 if __name__ == "__main__":
     app.run(debug=True)
