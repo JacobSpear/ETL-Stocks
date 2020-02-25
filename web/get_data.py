@@ -73,25 +73,37 @@ def get_data(currency,ticker,from_date,to_date):
 
     currency_id = session.query(Currency.currency_id).filter(Currency.currency_symbol == currency).one()[0]
 
-    E = Exchange_rate
-    max_date = max([x[0] for x in 
-     session.query(Exchange_rate.date_id).filter(and_(E.from_currency_id == 1,E.to_currency_id == currency_id)).all()])
+    # E = Exchange_rate
+    # max_date = max([x[0] for x in 
+    #  session.query(Exchange_rate.date_id).filter(and_(E.from_currency_id == 1,E.to_currency_id == currency_id)).all()])
 
-    ex_rates = session.query(Exchange_rate.date_id,Exchange_rate.open_value).filter(and_(E.from_currency_id==1,
+    ex_rates = session.query(Exchange_rate.date_id,Exchange_rate.open_value,Exchange_rate.close_value).filter(and_(E.from_currency_id==1,
                                                                               E.to_currency_id==currency_id)).subquery()
 
-    e_rate = session.query(ex_rates.c.open_value).filter(ex_rates.c.date_id>=max_date).subquery()
+    # e_rate = session.query(ex_rates.c.open_value).filter(ex_rates.c.date_id>=max_date).subquery()
 
+    # data = session.query(Stock.ticker,
+    #               Stock.date_id,
+    #               (Stock.open_price*e_rate).label(f"open_{ticker}_{currency}"),
+    #                (Stock.high_price*e_rate).label(f"high_{ticker}_{currency}"),
+    #                 (Stock.low_price*e_rate).label(f"low_{ticker}_{currency}"),
+    #               (Stock.close_price*e_rate).label(f"close_{ticker}_{currency}"),
+    #                 Stock.volume).\
+    #                 filter(and_(Stock.ticker==ticker,
+    #                             Stock.date_id >= from_date,
+    #                             Stock.date_id < to_date)).all()
+    
     data = session.query(Stock.ticker,
                   Stock.date_id,
-                  (Stock.open_price*e_rate).label(f"open_{ticker}_{currency}"),
-                   (Stock.high_price*e_rate).label(f"high_{ticker}_{currency}"),
-                    (Stock.low_price*e_rate).label(f"low_{ticker}_{currency}"),
-                  (Stock.close_price*e_rate).label(f"close_{ticker}_{currency}"),
+                  (Stock.open_price*ex_rates.c.open_value).label(f"open_{ticker}_{currency}"),
+                   (Stock.high_price*ex_rates.c.open_value).label(f"high_{ticker}_{currency}"),
+                    (Stock.low_price*ex_rates.c.open_value).label(f"low_{ticker}_{currency}"),
+                  (Stock.close_price*ex_rates.c.close_value).label(f"close_{ticker}_{currency}"),
                     Stock.volume).\
                     filter(and_(Stock.ticker==ticker,
                                 Stock.date_id >= from_date,
-                                Stock.date_id < to_date)).all()
+                                Stock.date_id < to_date,
+                                Stock.date_id == ex_rates.c.date_id)).all()
 
     data_json = {}
     data_json['Request_Data'] = {'Ticker' : ticker , 
@@ -102,6 +114,7 @@ def get_data(currency,ticker,from_date,to_date):
     data_json['Stock_Data'] = {}
 
     for x in data:
+        print(to_string(x[1]))
         data_json['Stock_Data'][to_string(x[1])] = {'open_price' : str(round(x[2],2))+f' {currency}',
                                                        'high_price' : str(round(x[3],2))+f' {currency}',
                                                        'low_price' : str(round(x[4],2))+f' {currency}',
@@ -111,6 +124,8 @@ def get_data(currency,ticker,from_date,to_date):
     conn.close()
     return data_json
 
+
+print(get_data('RUB','A',20200000,20200225))
 
     
 
