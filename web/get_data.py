@@ -73,7 +73,7 @@ def get_data(currency,ticker,from_date,to_date):
 
     currency_id = session.query(Currency.currency_id).filter(Currency.currency_symbol == currency).one()[0]
 
-    # E = Exchange_rate
+    E = Exchange_rate
     # max_date = max([x[0] for x in 
     #  session.query(Exchange_rate.date_id).filter(and_(E.from_currency_id == 1,E.to_currency_id == currency_id)).all()])
 
