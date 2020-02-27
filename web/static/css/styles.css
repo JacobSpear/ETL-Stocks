@@ -1,8 +1,23 @@
+html {background: rgb(250,251,255) !important;}
 body {
 
-background: rgb(250,251,255) !important;
-background: linear-gradient(180deg, rgba(250,251,255,1) 0%, rgba(243,246,254,1) 48%, rgba(243,245,253,1) 100%) !important;
+    
+    background: linear-gradient(180deg, rgba(250,251,255,1) 0%, rgba(243,246,254,1) 48%, rgba(243,245,253,1) 100%) !important;
 
+    }
+    
+.hero {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bg-hero-img {
+background: url('../img/bg-hero-home.png')  center top no-repeat; 
+background-size: contain;
+}
+.hero-doc {
+    margin-top: 20px;
 }
 
 .flexx-center{
@@ -35,17 +50,7 @@ img {
     border:0 !important;
     width: 300px;
 }
-.hero {
-    height: 40vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.hero-content {
-
-      
-}
 
 
 .purpleish {
