@@ -7,41 +7,24 @@
     <!-- bootstrap CSS and my styles.css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
        
-    <link rel="stylesheet" href="css/styles.css?q=123">
+    <link rel="stylesheet" href="css/styles.css">
     <!--bootstrap JS-->
      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</head>
+    </head>
 <body>
     <header class="container flexx-center">
 		<nav class="navbar navbar-expand-lg navbar-light">
             <div class="row">
               <div class="col-lg-2 col-sm-2">
-                <a class="navbar-brand" href="#">JLM</a>
+                <a class="navbar-brand" href="/">JLM</a>
 
               </div>
               <div class="col-lg-8 col-sm-8">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
                     <li class="nav-item">
                       <a class="nav-link" href="documentation.html">Documentation</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Endpoints
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Endpoint 01</a>
-                        <a class="dropdown-item" href="#">Endpoint 02</a>
-                        <a class="dropdown-item" href="#">Endpoint 03</a>
-                        <a class="dropdown-item" href="#">Endpoint 04</a>
-                      </div>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Analysis</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Report</a>
@@ -60,36 +43,91 @@
             </div>
       </nav>
 	    </header>
-	<div class="container">
-        <section class="row">
-            <article class="col-lg-12 hero">
-                <header class="hero-content">
-                    <h1 class="text-center">API for Smart Trade Decision-Making</h1>
-                        <h2 class="text-center purpleish">Headline 2 goes here</h2>
-                            <p class="text-center grayish">brief explanation of the capabilities of the application</p>
-                </header>
-            </article>
-        </section>
-  </div>
-  <div class="container-fluid feature-02">
-      <div class="container">
-        <section class="row">
-            <article class="col-lg-6 flexx-mid-center">
-                <header >
-                        <h3 class="text-justify">API Documentation</h3>
-                        <p class="text-justify">Here's the deal.</p>
-                            <p class="text-justify">The selected endpoits were planned so users can retrieve information based off specific needs one 
-                              might haveo about hostorical stocks, currencies and cryptocurrancies data.</p>
-                            <a href="documentation.html" class="btn btn-warning">Documentation</a>
-                </header>
-            </article>
-            <aside class="col-lg-6 flexx-mid-center">
-                <img class="img-thumbnail" src="img/placeholder-01.png">
-            </aside>
-        </section>
+        <div class="container">
+              <section class="row">
+                  <div class="col-12">
+                      <div class="row hero">
+                        <div class="col-12">
+                          <h2>JLM API Documentation</h2>
+                            <hr>
+                            <p>This is a demo project which fetches the data from a website through an API call and inserts it into a postgres Database.</p>
+                            <p>The Stock data for sp 500 companies are available here for the period between {January 2000} and {Yesterday}.</p>
+                            <p>Calls can be made to present the data in any currency.</p>
+                          </div>  
+                      </div>
+                      <div class="row">
+                        <div class="col-4">
+                            <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                              <li class="nav-item">
+                                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Plots</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Data</a>
+                              </li>
+
+                              </ul>
+                        </div>
+                      <!-- /.col-md-4 -->
+                          <div class="col-8">
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          <h3>Plots</h3>
+                              <p>The Plot endopoint enables the visualization of a trendline plot of any company in any year by typing the following URL on the browser, replacing the keywords encapsulated by &lt; and &gt; with the desired information:</p>
+                              <code>/plots/&lt;ticker&gt;/&lt;year&gt;</code><br><br>
+                              <p> For example, to retrieve the cost of 1 share of the company Agilient Techologies Inc stock in 2019, one should paste the following:</p>
+                              <code>/plots/A/2019</code><br><br>
+                              <p>The reposnse will look something like this:</p>
+                              <img class="img-thumbnail" src="img/A-2019-USD.png">
+                            </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <h3>Data</h3>
+                            <p>The stock / currency / data endpoint enables the retrieval of any stock in any currency for any given timeframe. To do so, one should type the following URL on the browser, replacing the keywords encapsulated by &lt; and &gt; with the desired information:</p>
+                        <code>/endpoints/stock_data/&lt;currency_symbol&gt;/&lt;ticker&gt;/&lt;from_date&gt;/&lt;to_date&gt;</code><br/><br/>
+                            <p> For example, to retrieve stocks from Microsoft in EUR currency during the year of 2019, one should paste the following:</p>
+
+                          <code>/endpoints/stock_data/EUR/MSFT/20170000/20171231</code><br/><br/>
+                            <p>The return would then be:</p>
+                            <pre id="json">
+                              "Request_Data": {
+                                "Currency": "EUR", 
+                                "From_Date": "20170000", 
+                                "Ticker": "MSFT", 
+                                "To_Date": "20171231"
+                              }, 
+                              "Stock_Data": {
+                                "2017-01-03": {
+                                  "close_price": "60.11 EUR", 
+                                  "high_price": "60.05 EUR", 
+                                  "low_price": "59.37 EUR", 
+                                  "open_price": "60.0 EUR", 
+                                  "volume": "20694101"
+                                }, 
+                                "2017-01-04": {
+                                  "close_price": "59.39 EUR", 
+                                  "high_price": "60.27 EUR", 
+                                  "low_price": "59.67 EUR", 
+                                  "open_price": "60.01 EUR", 
+                                  "volume": "21339969"
+                                }, 
+                                "2017-01-05": {
+                                  "close_price": "58.75 EUR", 
+                                  "high_price": "59.73 EUR", 
+                                  "low_price": "59.13 EUR", 
+                                  "open_price": "59.29 EUR", 
+                                  "volume": "24875968"
+                                }, (...) </pre>
+                        </div>
+
+                  
+                      </div>
+                      <!-- /.col-md-8 -->
+                  </div>
+                  </div>
+              </section>
         </div>
-    </div>   
+  
 	<footer class="container">
+    
 		<p>footer notes</p>
 	</footer>
 </body>
