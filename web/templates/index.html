@@ -7,7 +7,7 @@
     <!-- bootstrap CSS and my styles.css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
        
-    <link rel="stylesheet" href="css/styles.css?q=123">
+    <link rel="stylesheet" href="css/styles.css">
     <!--bootstrap JS-->
      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -23,26 +23,11 @@
               <div class="col-lg-8 col-sm-8">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
+
                     <li class="nav-item">
                       <a class="nav-link" href="documentation.html">Documentation</a>
                     </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Endpoints
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Endpoint 01</a>
-                        <a class="dropdown-item" href="#">Endpoint 02</a>
-                        <a class="dropdown-item" href="#">Endpoint 03</a>
-                        <a class="dropdown-item" href="#">Endpoint 04</a>
-                      </div>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Analysis</a>
-                    </li>
+
                     <li class="nav-item">
                       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Report</a>
                     </li>
@@ -59,39 +44,39 @@
                   </div>
             </div>
       </nav>
-	    </header>
-	<div class="container">
-        <section class="row">
-            <article class="col-lg-12 hero">
-                <header class="hero-content">
-                    <h1 class="text-center">API for Smart Trade Decision-Making</h1>
-                        <h2 class="text-center purpleish">Headline 2 goes here</h2>
-                            <p class="text-center grayish">brief explanation of the capabilities of the application</p>
-                </header>
-            </article>
-        </section>
-  </div>
-  <div class="container-fluid feature-02">
-      <div class="container">
-        <section class="row">
-            <article class="col-lg-6 flexx-mid-center">
-                <header >
-                        <h3 class="text-justify">API Documentation</h3>
-                        <p class="text-justify">The JLM API is organized around REST. Our API accepts request for XYZ and returns JSON responses through
-                          the use of standard HTTP response codes and authentication.</p>
-                            <p class="text-justify">The selected endpoits were planned so users can retrieve information based off specific needs one 
-                              might haveo about hostorical stocks, currencies and cryptocurrancies data.</p>
-                            <a href="documentation.html" class="btn btn-warning">Documentation</a>
-                </header>
-            </article>
-            <aside class="col-lg-6 flexx-mid-center">
-                <img class="img-thumbnail" src="img/placeholder-01.png">
-            </aside>
-        </section>
-        </div>
-    </div>   
+      </header>
+      <div class="container-fluid bg-hero-img ">
+          <div class="container  hero">
+                <section class="row">
+                    <article class="col-lg-12 hero">
+                        <header class="hero-content">
+                            <h1 class="text-center">API for Smart Trade Decision-Making</h1>
+                                <h2 class="text-center purpleish">Historical Stock Data for SP 500 companies</h2>
+                        </header>
+                    </article>
+                </section>
+          </div>
+          <div class="container-fluid feature-02">
+              <div class="container">
+                <section class="row">
+                    <article class="col-lg-6 flexx-mid-center">
+                        <header >
+                                <h3 class="text-justify">API Documentation</h3>
+                                <p class="text-justify">The JLM API is organized around REST. Our API accepts request for several Stock Data and returns JSON responses through
+                                  the use of standard HTTP response codes and authentication.</p>
+                                  
+                                    <a href="documentation.html" class="btn btn-warning">Documentation</a>
+                        </header>
+                    </article>
+                    <aside class="col-lg-6 flexx-mid-center">
+                        <img class="img-thumbnail" src="img/placeholder-01.png">
+                    </aside>
+                </section>
+                </div>
+          </div>
+      </div>   
 	<footer class="container">
-		<p>footer notes</p>
+		<p class="text-center">JLM</p>
 	</footer>
 </body>
 </html>
