@@ -141,7 +141,11 @@ def stocks(ticker_name):
 @app.route('/plots/<ticker_name>/<year>')
 def ticker_year_plot(ticker_name,year):
     img_url = one_year_open(ticker_name,year)
-    return render_template("plots.html",img_url = url_for('static',filename=img_url))
+    return render_template("plots.html",
+                            img_url = url_for('static',filename=img_url),
+                            company = ticker_name,
+                            year = year,
+                            brand_img=url_for('static',filename='img/logo.png'))
 
 if __name__ == "__main__":
     app.run(debug=True)
