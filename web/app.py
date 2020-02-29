@@ -93,19 +93,13 @@ def documentation():
 
     return render_template("documentation.html")
 
-@app.route("/analysis")
-def analysis():
-   return render_template("analysis.html")
 
 @app.route("/report")
 def report():
     return render_template("report.html")
 
-@app.route("/endpoints")
-def endpoints():
-    return render_template("endpoints.html")
 
-@app.route("/endpoints/tickers")
+@app.route("/api/tickers")
 def tickers_endpoints():
         # Create our session (link) from Python to the DB
         session = Session(engine)
@@ -121,12 +115,12 @@ def tickers_endpoints():
 
         return jsonify(all_names)
 
-@app.route("/endpoints/stock_data/<currency_symbol>/<ticker_name>/<from_date>/<to_date>")
+@app.route("/api/stock_data/<currency_symbol>/<ticker_name>/<from_date>/<to_date>")
 def stock_currency(currency_symbol,ticker_name,from_date,to_date):
     return jsonify(get_data(currency_symbol,ticker_name,from_date,to_date))
 
 
-@app.route('/endpoint/api/ticker/<ticker_name>')
+@app.route('/api/ticker/<ticker_name>')
 def stocks(ticker_name):
     """Return the stocksdata as json"""
 
@@ -147,7 +141,11 @@ def stocks(ticker_name):
 @app.route('/plots/<ticker_name>/<year>')
 def ticker_year_plot(ticker_name,year):
     img_url = one_year_open(ticker_name,year)
-    return render_template("plots.html",img_url = url_for('static',filename=img_url))
+    return render_template("plots.html",
+                            img_url = url_for('static',filename=img_url),
+                            company = ticker_name,
+                            year = year,
+                            brand_img=url_for('static',filename='img/logo.png'))
 
 if __name__ == "__main__":
     app.run(debug=True)
