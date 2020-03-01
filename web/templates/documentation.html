@@ -13,24 +13,28 @@
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </head>
 <body>
-    <header class="container">
+    <header class="container flexx-center">
 		<nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="/"><img height=100 src="img/logo.png"></a>
+            <div class="row">
+              <div class="col-lg-2 col-sm-2">
+                <a class="navbar-brand" href="/">JLM</a>
 
+              </div>
+              <div class="col-lg-8 col-sm-8">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="documentation.html"><strong>Documentation</strong></a>
+                      <a class="nav-link" href="documentation.html">Documentation</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"><strong>Report</strong></a>
+                      <a class="nav-link disabled" href="report.html" tabindex="-1" aria-disabled="true">Report</a>
                     </li>
                   </ul>
                                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 </div>
-
+              </div>
                   <div class="col-lg-2 col-sm-2">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -78,7 +82,7 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h3>Data</h3>
                             <p>The stock / currency / data endpoint enables the retrieval of any stock in any currency for any given timeframe. To do so, one should type the following URL on the browser, replacing the keywords encapsulated by &lt; and &gt; with the desired information:</p>
-                        <code>/endpoints/stock_data/&lt;currency_symbol&gt;/&lt;ticker&gt;/&lt;from_date&gt;/&lt;to_date&gt;</code><br/><br/>
+                        <code>/api/stock_data/&lt;currency_symbol&gt;/&lt;ticker&gt;/&lt;from_date&gt;/&lt;to_date&gt;</code><br/><br/>
                             <p> For example, to retrieve stocks from Microsoft in EUR currency during the year of 2019, one should paste the following:</p>
 
                           <code>/endpoints/stock_data/EUR/MSFT/20170000/20171231</code><br/><br/>
@@ -124,7 +128,7 @@
   
 	<footer class="container">
     
-
+		<p>footer notes</p>
 	</footer>
 </body>
 </html>
