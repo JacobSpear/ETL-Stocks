@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLM - Data for smarter trade decision-making - Report</title>
+    <!-- bootstrap CSS and my styles.css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+       
+    <link rel="stylesheet" href="css/styles.css?q=1">
+    <!--bootstrap JS-->
+     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <header class="container flexx-center">
+		<nav class="navbar navbar-expand-lg navbar-light">
+            <div class="row">
+              <div class="col-lg-2 col-sm-2">
+                <a class="navbar-brand" href="/">JLM</a>
+
+              </div>
+              <div class="col-lg-8 col-sm-8">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="documentation.html">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="report.html" tabindex="-1" aria-disabled="true">Report</a>
+                    </li>
+                  </ul>
+                                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                </div>
+              </div>
+                  <div class="col-lg-2 col-sm-2">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  </div>
+            </div>
+      </nav>
+	    </header>
+        <div class="container">
+              <section class="row">
+                  <div class="col-12">
+                    <h2>Technical Documentation</h2>
+                        <hr>
+                        <h3>Overview:</h3>
+                        <p>This documentation is part of the ETL-Stocks Projects. <br/><br/>The goal is to extract data from a web site through an API call and ingest data into a database using sqlalchemy and analyze it and provide the data to other prospective analysts through an API interface.
+                            We extracted the Stocks data for 20 years for the S&N 500 companies and analyzed it.  We also extracted the currency exchange rates for the same period. 
+                        </p>
+                        <p>The goal is to provide the following stocks information in the different currencies.</p>
+                        <ol>
+                            <li>Highest trading companies by year</li>
+                            <li>Highest trading company by volume</li>
+                            <li>Highest change in value</li>
+                            <li>Lowest change in value</li>
+                            <li>Average price by company</li>
+                            <li>Address all the above in a foreign currency</li>
+                        </ol>
+                        <h3>Project details:</h3>
+                        <p>The project is split into the following major categories:</p>
+                        <ol>
+                            <li>the subject area</li>
+                            <li>Identify the data the data sources</li>
+                            <li>Data extraction and cleansing</li>
+                            <li>Design and build database</li>
+                            <li>Design and build the website</li>
+                            <li>Analysis and presentation</li>
+                        </ol>
+                        <br>
+                        <br>
+                        <ol>
+                            <li>Identify the Subject area: The team reviewed the requirements of the project and considered the following aspects in selecting the project:</li>
+                        </ol>
+                        <ol class="alpha-lists">
+                            <li>Multiple data sources: The data is extracted from two websites as mentioned above in the “Data Sources” section</li>
+                            <li>Calendar table is built in a Spreadsheet</li>
+                        </ol>
+                        <p>Based on the above data requirements, the team identified Stocks Data analysis with an option to present the information in different currencies.</p>
+                        <ol start="2">
+                            <li>Data Sources:</li>
+                        </ol>
+                        <ol class="alpha-lists">
+                            <li>Source of S&P 500 tickers: https://datahub.io/core/s-and-p-500-companies#resource-constituents</li>
+                            <li>Stocks data and Exchange Rate: https://www.alphavantage.co/documentation/# (Stock data & Exchange rate)</li>
+                        </ol>
+
+                        <ol start="3">
+                            <li>Extraction and Cleansing:</li>
+                        </ol>
+                        <ol class="alpha-lists">
+                            <li>S&P500 Stock Tikers is extracted and loaded in the “Tickers” table</li>
+                            <li>The Stocks data is extracted for the last 20 years and imported in the “Stocks” table. The data is loaded up to the last business day</li>
+                            <li>While the stocks data is extracted the industry to which the Ticker belongs to is added to the “Sectors” table</li>
+                            <li>The calendar data is loaded from the Spreadsheet into the “Calendar” Table</li>
+                            <li>At the end of the process, the code looks for the currencies for which the exchange rates are requested. The exchange rates for the specified currencies is extracted and loaded for the last 20 years.</li>
+                        </ol>
+                        <ol start="4">
+                            <li>Design and Build of the data base:</li>
+                            <p>The tables were designed and built as per the ERD diagram shown below</p>
+                        </ol>
+                        <img class="img-fluid" src="img/database-structure.png">
+                        <ol start="5">
+                            <li>Query for the stocks trend:</li>
+                        </ol>
+                        <p><a href="http://127.0.0.1:5000/endpoints/stock_data/USD/AMZN/2018">http://127.0.0.1:5000/endpoints/stock_data/USD/AMZN/2018</a></p>
+                        <img class="img-fluid" src="img/amz-stocks-2018.png">
+
+                    </div>
+              </section>
+        </div>
+  
+	<footer class="container">
+    
+		<p>footer notes</p>
+	</footer>
+</body>
+</html>
